@@ -1,0 +1,5 @@
+.col { display: inline; }
+textarea { white-space: pre; word-wrap: nowrap; overflow-x: scroll; }
+#trainHeader, #testHeader, #portionCorrect { visibility: hidden; }
+.correct { color: green; }
+.wrong { color: red; }

@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+	<title>Bayesian Classification</title>
+	<script src="script.js"></script>
+	<link rel="stylesheet" href="styles.css"></link>
+</head>
+<body>
+	<div>
+		<h2>Classification Samples</h2>
+		<textarea id="type1" rows="35" cols="50"></textarea>
+		<textarea id="type2" rows="35" cols="50"></textarea>
+	</div>
+	<div>
+		<div>
+			Training percent:
+			<input type="number" id="trainPercent" value="0.6" min="0.1" max="1" step="0.1"></input>
+		</div>
+		<div>
+			Testing percent: <span id="testPercent">0.4</span>
+		</div>
+		<input type="button" id="train" value="train"></input>
+		<input type="button" id="test" value="test"></input>
+		<input type="button" id="load" value="Load Sample Data"></input>
+	</div>
+	<h2 id="trainHeader">Training Data</h2>
+	<div id="training">
+	</div>
+	<h2 id="testHeader">Test Results</h2>
+	<div id="testing">
+	</div>
+	<h3 id="portionCorrect">Stats</h3>
+	<div id="percents">
+	</div>
+</body>
+</body>
+</html>
