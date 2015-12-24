@@ -103,7 +103,7 @@ window.onload = function() {
 			}
 		}
 		function getMostLikelyLabel(probabilities) {
-			var maxLabel = '???', maxProb = -Infinity; //the reason is that probabilities stores the log of the actual probabilites
+			var maxLabel = '???', maxProb = -Infinity;
 			for(var l in probabilities) {
 				if(probabilities[l] > maxProb) {
 					maxLabel = l;
@@ -112,20 +112,32 @@ window.onload = function() {
 			}
 			return maxLabel;
 		}
+		function totalWordCount(word) {
+			var count = 0;
+			if(!wordCounts[word])	
+				return 0;
+			for(var l in wordCounts[word]) {
+				count += l;
+			}
+			return count;
+		}
 		var classify = function(text) {
 			//P(Ck|x1, ..., xn) = p(Ck)p(x1|Ck)* ... *p(xn|Ck)/p(x)
 			//p(x) is same for all C, so it can be ignored
-			//log p(Ck) + sum log p(xi|Ck)  if p(xi|Ck) = 0 then ignore
+			//weight p(xi|Ck) by how many times xi has appeared (If in only appeared once, then it cannot say much)
 			var words = tokenize(text);
 			var probabilities = {};
 			for(var l in labelCounts) {
-				var p = Math.log(labelCounts[l]/numberOfSamples);
+				var p = labelCounts[l]/numberOfSamples;
+				//TODO: most of the mistakes are classifying BUZZ as NYT
+				//http://datadino.ghost.io/buzz-or-times/ got 76%, so my ~72% is not bad
 				for(var w in words) {
-					if(w in wordCounts) { //not sure what to do if p(xi|Ck) = 0 (cannot take log of that)
+					if(w in wordCounts) {
+						var totalCount = totalWordCount(w);
 						if(wordCounts[w][l])
-							p += Math.log(wordCounts[w][l]/labelCounts[l]);
+							p *= (totalCount*wordCounts[w][l]/labelCounts[l] + 0.5)/(1.0 + totalCount);
 						else
-							p += Math.log(0.1/labelCounts[l]);
+							p *= 0.5/(1.0 + totalCount);
 					}
 				}
 				probabilities[l] = p;

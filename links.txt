@@ -1,0 +1,8 @@
+
+https://www.google.com/search?q=baysian+classification&rlz=1C1CHMO_enUS586US586&oq=baysian+classification&aqs=chrome..69i57.6399j0j1&sourceid=chrome&es_sm=122&ie=UTF-8
+
+list of clickbait links, + time, ny times
+https://github.com/tpeterson/clickbait
+
+http://stackoverflow.com/questions/10059594/a-simple-explanation-of-naive-bayes-classification
+http://en.wikipedia.org/wiki/Naive_Bayes_classifier
